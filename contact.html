@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contacto - Kenny Campoverde</title>
+
+  <!-- CSS Global -->
+  <link rel="stylesheet" href="css/navbar.css">
+  <link rel="stylesheet" href="css/styles.css">
+
+  <!-- Bootstrap Icons -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
+</head>
+<body>
+  <!-- ==================== -->
+  <!-- NAVBAR -->
+  <!-- ==================== -->
+  <header>
+    <nav class="navbar">
+      <ul class="nav-links">
+        <li><a href="index.html">Inicio</a></li>
+        <li><a href="projects.html">Proyectos</a></li>
+        <li><a href="about.html">Acerca de mí</a></li>
+        <li><a href="contact.html" class="active">Contacto</a></li>
+      </ul>
+      <div class="social-icons">
+        <a href="https://github.com/kcampoverde" target="_blank"><i class="bi bi-github"></i></a>
+        <a href="https://www.youtube.com/@KeNnYE_E" target="_blank"><i class="bi bi-youtube"></i></a>
+        <a href="https://x.com/K231A0" target="_blank"><i class="bi bi-twitter-x"></i></a>
+      </div>
+    </nav>
+  </header>
+
+  <!-- ==================== -->
+  <!-- CONTACTO -->
+  <!-- ==================== -->
+  <section class="contact-section">
+    <h2>Contáctame</h2>
+    <p class="subheading">Comencemos el diálogo</p>
+
+    <div class="contact-grid">
+      <!-- Columna izquierda -->
+      <div class="contact-left">
+        <h3>Habla conmigo</h3>
+
+        <div class="contact-option">
+          <i class="bi bi-envelope"></i>
+          <h4><a href="mailto:Eacosta9265@gmail.com">Email: Eacosta9265@gmail.com</a></h4>
+        </div>
+
+        <div class="contact-option">
+          <i class="bi bi-telegram"></i>
+          <h4><a href="https://t.me/kcampoverde" target="_blank">Telegram</a></h4>
+        </div>
+
+        <div class="contact-option">
+          <i class="bi bi-github"></i>
+          <h4><a href="https://github.com/kcampoverde" target="_blank">GitHub</a></h4>
+        </div>
+      </div>
+
+      <!-- Columna derecha -->
+      <div class="contact-right">
+        <h3>Escríbeme tu proyecto</h3>
+        <form id="contact-form">
+          <input type="text" name="name" placeholder="Nombre" required>
+          <input type="email" name="email" placeholder="Email" required>
+          <textarea name="message" rows="5" placeholder="Escríbeme tu proyecto" required></textarea>
+          <button type="submit">Enviar Mensaje →</button>
+          <p id="form-message" class="form-message"></p>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== -->
+  <!-- FOOTER -->
+  <!-- ==================== -->
+  <footer>
+    <p>© 2025 Kenny Campoverde</p>
+  </footer>
+
+  <!-- Script para conectar con el backend -->
+  <script>
+    const form = document.getElementById("contact-form");
+    const messageBox = document.getElementById("form-message");
+
+    form.addEventListener("submit", async (e) => {
+      e.preventDefault();
+
+      const data = {
+        name: form.name.value,
+        email: form.email.value,
+        message: form.message.value
+      };
+
+      try {
+        const res = await fetch("http://localhost:5000/send", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(data)
+        });
+
+        const result = await res.json();
+
+        if (res.ok) {
+          messageBox.textContent = "✅ Mensaje enviado con éxito.";
+          messageBox.className = "form-message success show";
+          form.reset();
+        } else {
+          messageBox.textContent = "❌ Error al enviar el mensaje.";
+          messageBox.className = "form-message error show";
+        }
+      } catch (err) {
+        messageBox.textContent = "⚠️ Error de conexión con el servidor.";
+        messageBox.className = "form-message error show";
+      }
+
+      setTimeout(() => {
+        messageBox.classList.add("fade-out");
+        setTimeout(() => {
+          messageBox.className = "form-message";
+          messageBox.textContent = "";
+        }, 600);
+      }, 5000);
+    });
+  </script>
+</body>
+</html>
