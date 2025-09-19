@@ -1,47 +1,62 @@
-document.getElementById("contactForm").addEventListener("submit", async (e) => {
-  e.preventDefault();
+document.addEventListener("DOMContentLoaded", () => {
+  const form = document.getElementById("contact-form");
+  const messageBox = document.getElementById("form-message");
 
-  const nombre = document.getElementById("nombre").value;
-  const email = document.getElementById("email").value;
-  const mensaje = document.getElementById("mensaje").value;
-  const formMessage = document.getElementById("formMessage");
+  if (!form) return; // Salir si no existe el formulario
 
-  const validateEmail = (email) => {
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    return emailRegex.test(email);
-  };
+  form.addEventListener("submit", async (e) => {
+    e.preventDefault();
 
-  if (!nombre || !email || !mensaje) {
-    formMessage.textContent = "⚠️ Todos los campos son obligatorios.";
-    formMessage.style.color = "orange";
-    return;
-  }
+    const name = form.name.value;
+    const email = form.email.value;
+    const message = form.message.value;
 
-  if (!validateEmail(email)) {
-    formMessage.textContent = "⚠️ Por favor, introduce un correo electrónico válido.";
-    formMessage.style.color = "orange";
-    return;
-  }
-
-  try {
-    const response = await fetch("https://api.example.com/send", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ nombre, email, mensaje }),
-    });
-
-    const result = await response.json();
-
-    if (result.success) {
-      formMessage.textContent = "✅ Mensaje enviado con éxito. Gracias por contactarme, te responderé pronto.";
-      formMessage.style.color = "green";
-      document.getElementById("contactForm").reset();
-    } else {
-      formMessage.textContent = "❌ Hubo un problema al enviar tu mensaje. Por favor, inténtalo de nuevo más tarde.";
-      formMessage.style.color = "red";
+    // Validación básica
+    if (!email.match(/^[^\s@]+@[^\s@]+\.[^\s@]+$/)) {
+      messageBox.textContent = "⚠️ Por favor, introduce un email válido.";
+      messageBox.className = "form-message error show";
+      return;
     }
-  } catch (error) {
-    formMessage.textContent = "⚠️ No se pudo conectar con el servidor.";
-    formMessage.style.color = "orange";
-  }
+
+    // Configuración del endpoint basado en el entorno
+    const apiUrl = window.location.hostname === "localhost" 
+      ? "http://localhost:5000/send" 
+      : "https://tu-dominio.com/api/send";
+
+    try {
+      const response = await fetch(apiUrl, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ name, email, message })
+      });
+
+      if (!response.ok) {
+        throw new Error(`Error HTTP: ${response.status}`);
+      }
+
+      const result = await response.json();
+
+      if (result.success) {
+        messageBox.textContent = "✅ Mensaje enviado con éxito.";
+        messageBox.className = "form-message success show";
+        form.reset();
+      } else {
+        messageBox.textContent = "❌ Error al enviar el mensaje: " + (result.message || "Desconocido");
+        messageBox.className = "form-message error show";
+      }
+    } catch (err) {
+      messageBox.textContent = "⚠️ Error de conexión con el servidor.";
+      messageBox.className = "form-message error show";
+      console.error("Error en el envío del formulario:", err);
+    }
+
+    // Ocultar el mensaje después de un tiempo
+    setTimeout(() => {
+      messageBox.classList.add("fade-out");
+      setTimeout(() => {
+        messageBox.className = "form-message";
+        messageBox.textContent = "";
+      }, 600);
+    }, 5000);
+  });
 });
