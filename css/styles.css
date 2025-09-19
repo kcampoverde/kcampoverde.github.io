@@ -332,16 +332,70 @@ footer {
 }
 
 @media (max-width: 768px) {
+  .navbar {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .nav-links {
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .main-content {
+    padding: 1rem;
+  }
+
+  .hero {
+    padding: 1.5rem;
+  }
+
+  .projects-section {
+    padding: 1rem;
+  }
+
   .project-card {
     flex-direction: column;
-    text-align: center;
+    align-items: flex-start;
+  }
+}
+
+@media (max-width: 480px) {
+  .hero h1 {
+    font-size: 1.5rem;
+  }
+
+  .hero p {
+    font-size: 1rem;
   }
 
   .project-card img {
-    width: 80%;
-  }
-
-  .contact-grid {
-    flex-direction: column;
+    width: 80px;
   }
 }
+
+/* ==================== */
+/* ACCESSIBILITY        */
+/* ==================== */
+
+:focus {
+  outline: 2px solid #0078d4;
+  outline-offset: 2px;
+}
+
+/* Ensure sufficient color contrast */
+body {
+  color: #1d1d1d;
+  background-color: #f8f8f8;
+}
+
+button {
+  background-color: #0078d4;
+  color: #ffffff;
+}
+
+button:hover {
+  background-color: #005a9e;
+}
+
+/* ARIA roles should be added directly in HTML, not CSS */
