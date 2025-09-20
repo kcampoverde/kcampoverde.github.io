@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="description" content="Proyectos de desarrollo web y tecnología creados por Kenny Campoverde">
+  <meta name="keywords" content="proyectos, desarrollo web, Kenny Campoverde, portfolio, programación">
+  <meta name="author" content="Kenny Campoverde">
+  <title>Proyectos - Kenny Campoverde</title>
+
+  <link rel="stylesheet" href="../assets/css/components/navbar.css">
+  <link rel="stylesheet" href="../assets/css/styles.css">
+  <link rel="icon" href="../assets/images/profile/foto_perfil.png" type="image/png">
+
+  <!-- Bootstrap Icons -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
+  
+  <!-- Scripts -->
+  <script src="../assets/js/projects.js" defer></script>
+</head>
+<body>
+  <!-- NAVBAR -->
+  <header>
+    <nav class="navbar">
+      <ul class="nav-links">
+        <li><a href="../index.html">Inicio</a></li>
+        <li><a href="projects.html" class="active">Proyectos</a></li>
+        <li><a href="about.html">Acerca de mí</a></li>
+        <li><a href="contact.html">Contacto</a></li>
+      </ul>
+      <div class="social-icons">
+        <a href="https://github.com/kcampoverde" target="_blank"><i class="bi bi-github"></i></a>
+        <a href="https://www.youtube.com/@KeNnYE_E" target="_blank"><i class="bi bi-youtube"></i></a>
+        <a href="https://x.com/K231A0" target="_blank"><i class="bi bi-twitter-x"></i></a>
+      </div>
+    </nav>
+  </header>
+
+  <!-- CONTENIDO -->
+  <main class="main-content">
+    <section class="projects-section">
+      <h2>Mis Proyectos</h2>
+
+      <div class="projects-grid">
+        <!-- Proyecto 1 -->
+        <div class="project-card">
+          <div class="project-image">
+            <img src="../assets/images/projects/proyecto1.svg" alt="Hollow Knight">
+            <div class="project-overlay">
+              <div class="preview-button" data-project="proyecto1">Vista Previa</div>
+            </div>
+          </div>
+          <div class="project-info">
+            <h3>Hollow Knight: Silksong</h3>
+            <p>Desarrollo de interfaz para videojuego indie con tecnologías web modernas.</p>
+            <div class="project-tags">
+              <span class="tag">HTML5</span>
+              <span class="tag">CSS3</span>
+              <span class="tag">JavaScript</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Proyecto 2 -->
+        <div class="project-card">
+          <div class="project-image">
+            <img src="../assets/images/projects/proyecto2.svg" alt="E-commerce">
+            <div class="project-overlay">
+              <div class="preview-button" data-project="proyecto2">Vista Previa</div>
+            </div>
+          </div>
+          <div class="project-info">
+            <h3>Tienda Online</h3>
+            <p>Plataforma e-commerce con carrito de compras y pasarela de pagos integrada.</p>
+            <div class="project-tags">
+              <span class="tag">React</span>
+              <span class="tag">Node.js</span>
+              <span class="tag">MongoDB</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Proyecto 3 -->
+        <div class="project-card">
+          <div class="project-image">
+            <img src="../assets/images/projects/proyecto3.svg" alt="App Móvil">
+            <div class="project-overlay">
+              <div class="preview-button" data-project="proyecto3">Vista Previa</div>
+            </div>
+          </div>
+          <div class="project-info">
+            <h3>Aplicación Móvil</h3>
+            <p>App multiplataforma para gestión de tareas y productividad personal.</p>
+            <div class="project-tags">
+              <span class="tag">Flutter</span>
+              <span class="tag">Firebase</span>
+              <span class="tag">Dart</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Modal de Vista Previa -->
+    <div id="previewModal" class="modal">
+      <div class="modal-content">
+        <span class="close-modal">&times;</span>
+        <div class="modal-header">
+          <h2 id="modalTitle">Título del Proyecto</h2>
+        </div>
+        <div class="modal-body">
+          <div class="preview-gallery">
+            <img id="modalMainImage" src="" alt="Vista previa del proyecto">
+          </div>
+          <div class="preview-info">
+            <h3>Descripción</h3>
+            <p id="modalDescription">Descripción detallada del proyecto.</p>
+            
+            <h3>Tecnologías</h3>
+            <div id="modalTechnologies" class="modal-tags"></div>
+            
+            <h3>Características</h3>
+            <ul id="modalFeatures">
+              <li>Característica 1</li>
+              <li>Característica 2</li>
+              <li>Característica 3</li>
+            </ul>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <a id="modalLiveLink" href="#" target="_blank" class="btn btn-primary">Ver Demo</a>
+          <a id="modalCodeLink" href="#" target="_blank" class="btn btn-secondary">Ver Código</a>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- FOOTER -->
+  <footer>
+    © 2025 Kenny Campoverde
+  </footer>
+</body>
+</html>

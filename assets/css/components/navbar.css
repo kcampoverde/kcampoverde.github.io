@@ -9,7 +9,7 @@ header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background-color: var(--color-primary);
+  background-color: #be1e2d; /* Rojo */
   padding: 0.8rem 2rem;
   flex-wrap: wrap;
 }
@@ -22,7 +22,7 @@ header {
 }
 
 .nav-links a {
-  color: var(--color-white);
+  color: #fff; /* Siempre blanco */
   font-weight: 500;
   position: relative;
   padding-bottom: 4px;
